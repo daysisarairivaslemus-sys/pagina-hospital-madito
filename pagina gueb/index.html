@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hospital Maldito</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{--night:#050a1c;--steel:#8791a8;--mist:#c9cedb;--star:#f3e9c6;--ice:#8fb1ff;
+--serif:"Cormorant Garamond",Georgia,serif;--type:"Special Elite","Courier New",monospace;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#050a1c,#0d1633 45%,#20263a) fixed #050a1c;color:var(--mist);font:1.2rem/1.7 var(--serif);overflow-x:hidden}
+#stars{position:fixed;inset:0;pointer-events:none}
+.s{position:absolute;border-radius:50%;background:var(--star);animation:tw 3s infinite ease-in-out}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:1;transform:scale(1.15)}}
+.hero,main,footer,.bar{position:relative;z-index:1}
+.bar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 22px;background:#050a1ccc;backdrop-filter:blur(6px);border-bottom:1px solid #2c376b;font:.95rem var(--type)}
+.bar b{color:#fff;letter-spacing:.1em}
+.bar nav{display:flex;gap:16px;flex-wrap:wrap}
+.bar a{color:var(--mist);text-decoration:none}.bar a:hover{color:var(--star)}
+.bar .mini{color:#1a0f0f;background:var(--star);padding:5px 14px;border-radius:3px}
+.hero{min-height:88vh;overflow:hidden;text-align:center;--x:70%;--y:45%}
+.scene{position:absolute;left:0;bottom:0;width:100%;height:68%}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle 280px at var(--x) var(--y),transparent,rgba(3,6,18,.62))}
+.hero-in{position:relative;z-index:3;padding:11vh 20px 0}
+.tag{font:.95rem var(--type);color:var(--ice);letter-spacing:.25em}
+h1{margin:6px 0 0;font-size:clamp(3rem,11vw,7.5rem);line-height:1;letter-spacing:.06em;color:#eef1fa;text-shadow:0 0 12px #5f86e8,0 0 44px #2d4aa8;animation:flick 7s infinite}
+@keyframes flick{0%,18%,22%,62%,66%,100%{opacity:1}20%,64%{opacity:.35}21%{opacity:.9}65%{opacity:.55}}
+.sub{max-width:600px;margin:14px auto 0;font-style:italic;color:var(--steel);font-size:1.35rem}
+.cta{display:inline-block;margin-top:28px;padding:16px 46px;font:1.25rem var(--type);letter-spacing:.08em;color:#1a0f0f;background:linear-gradient(#f3e9c6,#c9b56f);border-radius:4px;text-decoration:none;box-shadow:0 0 34px #f3e9c655;transition:.25s;animation:pulse 2.4s infinite}
+.cta:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 0 60px #f3e9c699}
+@keyframes pulse{50%{box-shadow:0 0 56px #f3e9c688}}
+.flk{animation:fl 5s infinite}
+@keyframes fl{0%,40%,44%,100%{opacity:1}42%,72%{opacity:.15}74%{opacity:.8}}
+section{max-width:1120px;margin:0 auto;padding:76px 22px}
+h2{margin:0 0 40px;text-align:center;font-size:clamp(2rem,5vw,3rem);color:#fff;letter-spacing:.04em}
+h2::after{content:"✦  ✧  ✦";display:block;font-size:1rem;letter-spacing:.5em;color:var(--star)}
+.story{display:grid;grid-template-columns:1.1fr 1fr;gap:38px;align-items:center}
+.file{background:linear-gradient(160deg,#141d42e6,#0b1129e6);border:1px solid #2c376b;border-radius:4px;padding:34px 32px;position:relative;box-shadow:0 20px 50px #0008}
+.file::before{content:"CASO SIN RESOLVER · 1987";position:absolute;top:-13px;left:24px;background:var(--night);border:1px solid #4a5590;color:var(--ice);font:.8rem var(--type);padding:3px 12px}
+.file p{margin:0 0 16px}.file p:last-child{margin:0;font-style:italic;color:var(--star)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat{border:1px solid #2c376b;background:#0b1129;padding:22px 10px;text-align:center;border-radius:4px}
+.stat b{display:block;font-size:2.6rem;color:var(--star);text-shadow:0 0 14px #f3e9c655}
+.stat span{font:.85rem var(--type);color:var(--steel)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.ch{background:linear-gradient(180deg,#16214a,#0c1330);border:1px solid #2c376b;border-radius:4px;padding:26px 18px;text-align:center;transition:.3s}
+.ch:hover{transform:translateY(-6px);border-color:#5f6fc0;box-shadow:0 14px 40px #2d4aa844}
+.av{width:96px;height:96px;margin:0 auto 12px;border-radius:50%;padding:4px;background:conic-gradient(#8791a8,#2d4aa8,#c9cedb,#17224d,#8791a8)}
+.av svg{width:100%;height:100%;border-radius:50%;display:block}
+.ch h3{margin:0;font-size:1.6rem;color:#fff}
+.ch .r{font:.85rem var(--type);color:var(--ice)}
+.ch p{margin:10px 0 0;font-size:1.05rem;line-height:1.45;color:#b4bbcd}
+#chars{grid-template-columns:minmax(220px,340px);justify-content:center}
+.lv{border:1px solid #2c376b;border-top:4px solid var(--c);border-radius:4px;padding:22px 20px;background:#0b1129;transition:.3s}
+.lv:hover{transform:translateY(-5px);box-shadow:0 12px 34px #0008}
+.lv .n{font:.8rem var(--type);color:var(--steel)}
+.lv i{display:block;font-size:2.4rem;font-style:normal;margin:4px 0}
+.lv h3{margin:0 0 6px;font-size:1.45rem;color:#fff}
+.lv p{margin:0;font-size:1.02rem;line-height:1.45;color:#b4bbcd}
+.end{text-align:center;border:1px solid #2c376b;background:linear-gradient(#141d42,#0b1129);padding:30px 20px;border-radius:4px}
+.end i{font-size:2.6rem;font-style:normal}.end h3{margin:6px 0;font-size:1.6rem;color:var(--star)}.end p{margin:0;font-size:1.05rem;color:#b4bbcd}
+.ctl div{border:1px dashed #38437a;padding:18px;text-align:center;border-radius:4px;background:#0a1128;font:1rem var(--type)}
+kbd{display:inline-block;background:#1b2758;border:1px solid #4a5590;border-radius:4px;padding:1px 9px;margin:2px;color:var(--star)}
+.final{text-align:center}
+footer{text-align:center;padding:40px 20px 70px;color:var(--steel);font:.95rem var(--type)}
+@media(max-width:780px){.story{grid-template-columns:1fr}.bar nav a:not(.mini){display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="stars" aria-hidden="true"></div>
+
+<div class="bar"><b>HOSPITAL MALDITO</b>
+  <nav><a href="#historia">Historia</a><a href="#personajes">Personajes</a><a href="#niveles">Niveles</a><a href="#finales">Finales</a><a class="mini" href="juego.html">▶ Juega aquí</a></nav>
+</div>
+
+<header class="hero" id="hero">
+  <svg class="scene" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Hospital abandonado bajo la luna">
+    <defs><radialGradient id="mn"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#c9cedb"/></radialGradient><radialGradient id="hl"><stop offset="0" stop-color="#8fb1ff55"/><stop offset="1" stop-color="#8fb1ff00"/></radialGradient></defs>
+    <circle cx="930" cy="170" r="150" fill="url(#hl)"/><circle cx="930" cy="170" r="62" fill="url(#mn)"/>
+    <rect x="330" y="310" width="540" height="320" fill="#0f1737"/><rect x="200" y="390" width="130" height="240" fill="#0c1230"/><rect x="870" y="390" width="130" height="240" fill="#0c1230"/>
+    <rect x="560" y="230" width="80" height="80" fill="#0f1737"/><rect x="326" y="304" width="548" height="9" fill="#1b2758"/>
+    <g fill="#8fb1ff"><rect x="595" y="180" width="10" height="44"/><rect x="578" y="196" width="44" height="10"/></g>
+    <g id="win"></g><rect x="570" y="545" width="60" height="85" fill="#02040c"/>
+    <rect y="630" width="1200" height="70" fill="#03060f"/>
+    <g fill="#03060f"><path d="M40 640l28-190 28 190zM100 640l22-140 22 140zM1060 640l30-200 30 200zM1130 640l20-130 20 130z"/></g>
+  </svg>
+  <div class="hero-in">
+    <div class="tag">JUEGO DE TERROR Y ESCAPE</div>
+    <h1>Hospital Maldito</h1>
+    <p class="sub">Las puertas se cierran solas, los pasillos susurran y alguien sigue de guardia a medianoche.</p>
+    <a class="cta" href="juego.html">▶ JUEGA AQUÍ</a>
+  </div>
+</header>
+
+<main>
+<section id="historia"><h2>La historia</h2>
+  <div class="story">
+    <div class="file">
+      <p>En 1987 el Hospital Nacional Saldaña cerró de un día para otro: pacientes desaparecidos y un ala entera sellada con concreto.</p>
+      <p>Treinta y siete años después, un grupo de amigos entra por una apuesta de Halloween. Las puertas se cierran solas. Para escapar deberán explorar cada nivel, resolver acertijos, conseguir llaves y huir de la Enfermera de las Suturas.</p>
+      <p>Nadie sabe qué pasó en esa ala sellada. Ahora te toca descubrirlo.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>5</b><span>NIVELES</span></div><div class="stat"><b>1</b><span>PERSONAJE</span></div>
+      <div class="stat"><b>3</b><span>LLAVES POR NIVEL</span></div><div class="stat"><b>3</b><span>FINALES</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="personajes"><h2>El personaje</h2><div class="grid" id="chars"></div></section>
+
+<section id="niveles"><h2>Los 8 niveles</h2><div class="grid" id="lvls"></div></section>
+
+<section id="finales"><h2>3 finales</h2>
+  <div class="grid">
+    <div class="end"><i>🚪</i><h3>Escape</h3><p>Sales del hospital al amanecer. Nadie te va a creer, pero estás vivo.</p></div>
+    <div class="end"><i>🕯️</i><h3>Sacrificio</h3><p>Escapas por muy poco. El hospital se queda con algo tuyo para siempre.</p></div>
+    <div class="end"><i>🏆</i><h3>Verdad</h3><p>Descubres quién fue realmente la Enfermera de las Suturas.</p></div>
+  </div>
+</section>
+
+<section id="controles"><h2>Cómo se juega</h2>
+  <div class="grid ctl">
+    <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> o flechas<br>Moverse</div>
+    <div><kbd>C</kbd><br>Cambiar cámara: normal o linterna</div>
+    <div>🔑 Reúne las llaves y abre la salida</div>
+    <div>❤️ Solo 3 vidas para todo el hospital</div>
+  </div>
+</section>
+
+<section class="final"><h2>¿Te atreves a entrar?</h2><a class="cta" href="juego.html">▶ JUEGA AQUÍ</a></section>
+</main>
+<footer>✦ Hospital Maldito · Nunca apagues la linterna ✦</footer>
+
+<script>
+(function(){
+var c=document.getElementById('stars'),i,e,z;
+for(i=0;i<100;i++){e=document.createElement('span');z=1+Math.random()*2.4;e.className='s';e.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+z+'px;height:'+z+'px;animation-delay:'+Math.random()*4+'s';c.appendChild(e)}
+var g=document.getElementById('win'),N='http://www.w3.org/2000/svg',r,k;
+for(r=0;r<4;r++)for(k=0;k<8;k++){e=document.createElementNS(N,'rect');e.setAttribute('x',352+k*62);e.setAttribute('y',330+r*68);e.setAttribute('width',26);e.setAttribute('height',38);var lit=Math.random()<.14;e.setAttribute('fill',lit?'#f3e9c6':'#050a1c');e.setAttribute('stroke','#26326a');if(lit){e.setAttribute('class','flk');e.style.animationDelay=(-Math.random()*5)+'s'}g.appendChild(e)}
+var h=document.getElementById('hero');
+h.addEventListener('pointermove',function(v){var b=h.getBoundingClientRect();h.style.setProperty('--x',(v.clientX-b.left)+'px');h.style.setProperty('--y',(v.clientY-b.top)+'px')});
+
+var P=[['Dylan','Fuerza cerraduras: abre la salida con solo 2 llaves','#c7702e','#e8c9a0']];
+document.getElementById('chars').innerHTML=P.map(function(p,n){return '<article class="ch"><div class="av"><svg viewBox="0 0 90 90"><rect width="90" height="90" fill="#1a2350"/><circle cx="45" cy="40" r="16" fill="'+p[3]+'"/><path d="M27 38Q45 8 63 38Q45 26 27 38Z" fill="#3a2a2a"/><path d="M16 90Q45 54 74 90Z" fill="'+p[2]+'"/><circle cx="39" cy="42" r="2" fill="#050a1c"/><circle cx="51" cy="42" r="2" fill="#050a1c"/></svg></div><h3>'+p[0]+'</h3><div class="r">Protagonista</div><p>'+p[1]+'</p></article>'}).join('');
+
+var V=[['Recepción','🗄️','#7d5d43','El mostrador sigue lleno de papeles de 1987.'],['Urgencias','🛏️','#5e7d8f','Camillas vacías y luces que titilan.'],['Quirófano','💉','#4d8a73','La lámpara quirúrgica gira sola.'],['Morgue','⚰️','#7a8ea3','Aire helado y cajones que se abren despacio.'],['El ala sellada','🕯️','#7a4a5a','El concreto se quebró. Solo hay una salida.']];
+document.getElementById('lvls').innerHTML=V.map(function(v,n){return '<article class="lv" style="--c:'+v[2]+'"><div class="n">NIVEL '+(n+1)+'</div><i>'+v[1]+'</i><h3>'+v[0]+'</h3><p>'+v[3]+'</p></article>'}).join('');
+})();
+</script>
+</body>
+</html>

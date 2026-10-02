@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Abandonado 2D</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#111;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+
+#game{
+    display:block;
+    margin:auto;
+    background:#222;
+    image-rendering:auto;
+}
+
+#menu{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(#17283b,#071016);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:10;
+}
+
+.panel{
+    width:600px;
+    max-width:90%;
+    padding:35px;
+    text-align:center;
+    border:5px solid #d6d6d6;
+    border-radius:20px;
+    background:#263746;
+    box-shadow:0 0 30px #000;
+}
+
+.panel h1{
+    color:white;
+    font-size:42px;
+    margin-bottom:15px;
+    text-shadow:4px 4px #000;
+}
+
+.panel p{
+    color:#ddd;
+    font-size:18px;
+    line-height:1.7;
+}
+
+button{
+    margin-top:25px;
+    padding:15px 35px;
+    font-size:22px;
+    font-weight:bold;
+    border:0;
+    border-radius:12px;
+    cursor:pointer;
+    background:#e6b83f;
+    color:#171717;
+    box-shadow:0 5px #8c6820;
+}
+
+button:active{
+    transform:translateY(5px);
+    box-shadow:none;
+}
+
+#hud{
+    position:fixed;
+    top:15px;
+    left:15px;
+    right:15px;
+    display:none;
+    justify-content:space-between;
+    align-items:flex-start;
+    pointer-events:none;
+    z-index:5;
+}
+
+.hudBox{
+    background:rgba(10,15,20,.88);
+    border:3px solid #ddd;
+    border-radius:12px;
+    padding:10px 15px;
+    color:white;
+    font-weight:bold;
+    box-shadow:0 4px 10px #000;
+}
+
+#message{
+    position:fixed;
+    bottom:35px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(0,0,0,.9);
+    color:white;
+    padding:12px 25px;
+    border-radius:12px;
+    font-size:19px;
+    display:none;
+    z-index:8;
+}
+
+#gameOver,#victory,#levelScreen{
+    position:fixed;
+    inset:0;
+    background:rgba(5,8,12,.94);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:20;
+}
+
+.screenBox{
+    text-align:center;
+    color:white;
+    padding:35px;
+}
+
+.screenBox h2{
+    font-size:45px;
+    margin-bottom:15px;
+    text-shadow:4px 4px #000;
+}
+
+.screenBox p{
+    font-size:20px;
+    margin:10px;
+}
+
+/* ===== DISEÑO MEJORADO ===== */
+body{
+    background:#05070a;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+#game{
+    display:block;
+    margin:auto;
+    background:#090d12;
+    image-rendering:auto;
+    border:2px solid #202a33;
+}
+#menu{
+    background:
+      radial-gradient(circle at 50% 35%, rgba(110,20,25,.22), transparent 28%),
+      radial-gradient(circle at 20% 80%, rgba(30,70,90,.18), transparent 30%),
+      linear-gradient(135deg,#05070b,#111923 48%,#030406);
+}
+#menu:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      repeating-linear-gradient(90deg,transparent 0,transparent 90px,rgba(255,255,255,.015) 91px),
+      linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.45));
+    pointer-events:none;
+}
+.panel{
+    position:relative;
+    width:700px;
+    max-width:92%;
+    padding:42px 44px;
+    text-align:center;
+    border:1px solid rgba(220,235,245,.35);
+    border-radius:24px;
+    background:linear-gradient(145deg,rgba(28,40,52,.96),rgba(8,13,18,.96));
+    box-shadow:0 0 0 1px rgba(255,255,255,.04),0 0 60px rgba(0,0,0,.9),0 0 28px rgba(120,20,30,.16);
+    backdrop-filter:blur(8px);
+}
+.panel:after{
+    content:"";
+    position:absolute;
+    inset:10px;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:17px;
+    pointer-events:none;
+}
+.panel h1{
+    color:#f2f4f5;
+    font-size:46px;
+    letter-spacing:3px;
+    margin-bottom:14px;
+    text-shadow:0 0 10px rgba(255,255,255,.15),0 4px 0 #000;
+}
+.panel h1:first-letter{filter:drop-shadow(0 0 8px #b32632);}
+.panel p{color:#bfc8cf;font-size:17px;line-height:1.7;}
+.panel p:nth-of-type(2){
+    margin:24px auto 0!important;
+    padding:15px 18px;
+    max-width:480px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    background:rgba(0,0,0,.22);
+}
+button{
+    position:relative;
+    margin-top:25px;
+    padding:15px 42px;
+    font-size:20px;
+    letter-spacing:1px;
+    font-weight:800;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:14px;
+    cursor:pointer;
+    background:linear-gradient(#d7a82e,#a97513);
+    color:#15100a;
+    box-shadow:0 5px 0 #65470c,0 0 24px rgba(214,170,45,.16);
+    transition:.18s;
+}
+button:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.1);
+    box-shadow:0 7px 0 #65470c,0 0 30px rgba(214,170,45,.25);
+}
+button:active{transform:translateY(4px);box-shadow:0 1px 0 #65470c;}
+#hud{
+    top:14px;
+    left:14px;
+    right:14px;
+    gap:10px;
+}
+.hudBox{
+    min-width:130px;
+    background:linear-gradient(145deg,rgba(8,13,18,.94),rgba(18,25,31,.88));
+    border:1px solid rgba(214,225,232,.22);
+    border-radius:14px;
+    padding:10px 15px;
+    color:#eef3f5;
+    font-weight:bold;
+    box-shadow:0 7px 18px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.05);
+    backdrop-filter:blur(5px);
+}
+#message{
+    bottom:28px;
+    background:linear-gradient(145deg,rgba(5,8,12,.96),rgba(25,30,34,.94));
+    border:1px solid rgba(255,255,255,.16);
+    box-shadow:0 0 30px rgba(0,0,0,.7);
+    color:#f3f5f6;
+}
+#levelScreen,#gameOver,#victory{
+    background:
+      radial-gradient(circle at center,rgba(65,18,24,.20),transparent 45%),
+      rgba(2,5,8,.94);
+    backdrop-filter:blur(5px);
+}
+.screenBox{
+    min-width:460px;
+    max-width:90%;
+    padding:42px 50px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:22px;
+    background:linear-gradient(145deg,rgba(19,28,36,.97),rgba(5,9,13,.97));
+    box-shadow:0 0 50px rgba(0,0,0,.8);
+}
+.screenBox h2{
+    font-size:43px;
+    letter-spacing:2px;
+    text-shadow:0 0 16px rgba(255,255,255,.12),0 4px #000;
+}
+.screenBox p{color:#c4ccd2;}
+@media(max-width:700px){
+    .panel{padding:30px 22px;}
+    .panel h1{font-size:32px;}
+    .screenBox{min-width:0;padding:30px 22px;}
+    .hudBox{min-width:auto;font-size:13px;padding:8px 10px;}
+}
+
+
+#keyBox{border-color:rgba(255,210,60,.28);}
+#keyCounter{color:#ffd94d;font-size:16px;}
+#hud .hudBox:first-child{border-color:rgba(220,55,65,.3);}
+</style>
+</head>
+
+<body>
+
+<canvas id="game" width="1100" height="650"></canvas>
+
+<div id="menu">
+    <div class="panel">
+        <h1>🏥 HOSPITAL MALDITO</h1>
+        <p>
+            Has entrado a un hospital que lleva años abandonado.<br>
+            Hay algo extraño escondido en cada zona.
+        </p>
+
+        <p style="margin-top:15px">
+            🎮 <b>WASD / FLECHAS</b> — Moverse<br>
+            📷 <b>C</b> — Cambiar cámara<br>
+            🔑 Hay 3 llaves escondidas en cada nivel<br>
+❤️ Tienes solo 3 vidas para completar todo el hospital
+        </p>
+
+        <button onclick="startGame()">JUGAR</button>
+    </div>
+</div>
+
+<div id="hud">
+    <div class="hudBox">
+        ❤️ Vidas: <span id="lives">5</span>
+    </div>
+
+    <div class="hudBox">
+        🏥 Nivel: <span id="level">1</span>
+    </div>
+
+    <div class="hudBox">
+        📷 Cámara: <span id="camera">NORMAL</span>
+    </div>
+</div>
+
+<div id="message"></div>
+
+<div id="levelScreen">
+    <div class="screenBox">
+        <h2 id="levelTitle"></h2>
+        <p id="levelDescription"></p>
+        <button onclick="continueLevel()">ENTRAR</button>
+    </div>
+</div>
+
+<div id="gameOver">
+    <div class="screenBox">
+        <h2>💀 FIN DEL JUEGO</h2>
+        <p>El hospital te a encerrado.</p>
+        <button onclick="location.reload()">REINTENTAR</button>
+    </div>
+</div>
+
+<div id="victory">
+    <div class="screenBox">
+        <h2>🏆 ¡ESCAPASTE!</h2>
+        <p>Lograste atravesar todo el hospital maldito.</p>
+        <button onclick="location.reload()">JUGAR DE NUEVO</button>
+    </div
